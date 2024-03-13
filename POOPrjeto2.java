@@ -20,22 +20,13 @@ public class POOPrjeto2 {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        String nome, mensagem = "";
+        String nome, mensagem;
         int idade;
         
         nome = JOptionPane.showInputDialog("Digite o nome: ");
         String resposta = JOptionPane.showInputDialog("Digite a idade ");
         idade = Integer.parseInt(resposta);
-        resposta = JOptionPane.showInputDialog("Digite a situa��o: (ativa/inativa) ");
 
-        if (!resposta.equalsIgnoreCase("ativa")) {
-            mensagem = "Usu�rio inativo no sistema!";
-        } else if (idade < 18) {
-            mensagem = "Pessoa menor idade! Precisa de um respons�vel.";
-        } else {
-           mensagem = "Pessoa maior de idade!";
-        }
-
-        JOptionPane.showMessageDialog(null,"Nome: " + nome + "\nIdade: " + idade + "\n" + mensagem);
+        JOptionPane.showMessageDialog(null,"Nome: " + nome + "\nIdade: " + idade);
     }
 }
