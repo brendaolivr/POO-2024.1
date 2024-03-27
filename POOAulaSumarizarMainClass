@@ -1,0 +1,67 @@
+package aula1poo;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.ArrayList;
+
+public class Aula1POO {
+
+    //método principal 
+    public static void main(String[] args) {
+        //Criar objeto Pessoa;
+        
+        //Criar o objeto Scanner para ler do teclado
+        Scanner teclado = new Scanner(System.in);
+        ArrayList<Pessoa> pessoas = new ArrayList<Pessoa>(); 
+        //Ler a variável nome
+        loop: do {
+            Pessoa p = new Pessoa();
+            System.out.println("Informe o nome: (Digite SAIR para finalizar)");
+            p.nome = teclado.next();           
+            if (p.nome.equalsIgnoreCase("sair")) {
+                break loop;
+            }
+
+            //Ler a variável data de nascimento
+            boolean erro = true;
+            do {
+                System.out.println("Informe a Data de Nascimento: ");
+                String dataTexto = teclado.next();
+                //Converter de String para Date
+                SimpleDateFormat formatoData = new SimpleDateFormat("dd/MM/yyyy");
+                formatoData.setLenient(false);
+                try {
+                    p.dataNascimento = formatoData.parse(dataTexto);
+                    Calendar dataNasc = Calendar.getInstance();
+                    dataNasc.setTime(p.dataNascimento);
+                    Calendar hoje = Calendar.getInstance();
+                    hoje.getTime();
+                    if (hoje.after(dataNasc)) {
+                        erro = false;
+                    }
+
+                } catch (ParseException ex) {
+                    System.out.println("Data Inválida: " + dataTexto);
+                    Logger.getLogger(Aula1POO.class.getName()).log(Level.SEVERE, null, ex);
+                }                            
+            } while (erro);
+           pessoas.add(p);
+            //Imprimir os dados solicitados
+            System.out.println(p.imprimir());
+        }while (true);
+        
+        SumarioPessoa sumario = new SumarioPessoa();
+        sumario = sumario.sumarizar(pessoas);
+        System.out.println("Quantidade de pessoas cadastradas: "+sumario.c);
+        System.out.println("Soma das idades: "+sumario.soma);
+        System.out.println("Media das idades: "+sumario.media);
+        System.out.println(sumario.nomeMaior+" tem a maior idade com "+sumario.maiorid+ " anos ");
+        System.out.println(sumario.nomeMenor+" tem a menor idade com "+sumario.menorid+ " anos ");
+        System.out.println("Percentual de pessoas com idade maior ou igual a 18: "+sumario.percmr+"%");
+        System.out.println("Percentual de pessoas com idade menor que 18: "+sumario.percmn+"%");
+    }
+}
