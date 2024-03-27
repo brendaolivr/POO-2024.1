@@ -1,0 +1,46 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package aula1poo;
+
+import java.util.ArrayList;
+
+/**
+ *
+ * @author aluno
+ */
+public class SumarioPessoa {
+    
+     int c=0,idade,soma=0,maiorid=0,menorid=Integer.MAX_VALUE,cmaiorid=0,cmenorid=0;
+     double media=0,percmn=0,percmr=0;
+     String nomeMaior = null;
+     String nomeMenor = null;
+     
+     public SumarioPessoa sumarizar(ArrayList<Pessoa> pessoas){
+         for (Pessoa p: pessoas){
+                c++;
+                idade = p.calcularIdade();
+                soma+=idade;                           
+                 if(idade<18){
+                    cmenorid++;
+                }            
+                if(idade>=18){
+                    cmaiorid++;
+                }               
+                if(idade<menorid){
+                    menorid=idade;
+                    nomeMenor = p.nome;
+                }
+                if(idade>maiorid){
+                    maiorid = idade;
+                    nomeMaior = p.nome;
+                }      
+                media = soma/c;
+                percmn = (double) cmenorid/c * 100;
+                percmr = (double) cmaiorid/c * 100;
+            }   
+         return this;
+     }
+}
